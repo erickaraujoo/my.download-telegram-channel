@@ -3,4 +3,4 @@ obsoleto
 session_name.session
 session_name.session-journal
 .env
-/**/__pychace__
+__pycache__
