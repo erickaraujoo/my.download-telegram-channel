@@ -59,8 +59,9 @@ async def download_media_usecase(
         media_path = get_media_path(channel_path=channel_path, media_name=media_name)
 
         if os.path.exists(media_path):
-            print(f"✔️  Canal {channel_name} atualizado com sucesso!")
-            break
+            continue
+            # print(f"✔️  Canal {channel_name} atualizado com sucesso!")
+            # break
 
         downloaded_media = await download_media(
             message=typed_message, media_path=media_path

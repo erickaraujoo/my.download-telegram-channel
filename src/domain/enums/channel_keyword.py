@@ -1,11 +1,19 @@
+import unicodedata
+import re
 from enum import Enum
 from src.config.constants import channel_names
 
-print(channel_names)
+
+def format_enum_key(name: str) -> str:
+    name = unicodedata.normalize("NFKD", name).encode("ASCII", "ignore").decode()
+    name = name.replace(" ", "_")
+    name = re.sub(r"[^A-Za-z0-9_]", "", name)
+    name = re.sub(r"_+", "_", name)
+    name = name.strip("_")
+
+    return name.upper()
 
 
-class ChannelKeyword(Enum):
-    ASMR_18 = channel_names[0]
-    FEET_PARTY = channel_names[1]
-    I_LV_FEET = channel_names[2]
-    VINTAGEX = channel_names[3]
+channel_dict = {format_enum_key(name): name for name in channel_names}
+
+ChannelKeyword = Enum("ChannelKeyword", channel_dict)
